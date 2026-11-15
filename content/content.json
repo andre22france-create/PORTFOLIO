@@ -30,14 +30,14 @@
     }
   ],
   "home": {
-    "heroImage": "",
+    "heroImage": "images/hero-g5621v.png",
     "heroNote": "© 2026",
     "aboutRow": {
       "left": "(01)",
       "center": "",
       "right": "© 2026"
     },
-    "portrait": "",
+    "portrait": "images/portrait-aqwzs2.jpg",
     "portraitAlt": "Portrait of Andrea Franceschetto",
     "aboutText": "My name is Andrea, and I’m a graphic designer from Treviso, Italy. I’m curious by nature, always eager to challenge myself and explore new creative directions. My passion for cinema, music, and the outdoors strongly influences the way I approach design and observe the world around me.\nI believe in the value of teamwork and in constantly seeking new experiences, as they help me grow both personally and professionally.",
     "projectsRow": {
@@ -59,7 +59,7 @@
   },
   "contact": {
     "heading": "GET IN TOUCH:",
-    "portrait": "",
+    "portrait": "images/contact-portrait-40yh39.jpg",
     "portraitAlt": "Portrait of Andrea Franceschetto",
     "links": [
       {
@@ -102,7 +102,7 @@
       "category": "Branding",
       "year": "2025",
       "featured": true,
-      "cover": "",
+      "cover": "images/velorun-cover-0mlydq.jpg",
       "coverAlt": "Runner in motion in a forest",
       "coverFocus": {
         "x": 50,
@@ -117,7 +117,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-1-1-six53y.png",
               "alt": "Velorun logo construction grid"
             }
           ]
@@ -127,7 +127,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-2-1-w8u14i.jpg",
               "alt": "Velorun posters on a wall"
             }
           ]
@@ -137,7 +137,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-3-1-y3g80u.jpg",
               "alt": "Velorun shopping bag"
             }
           ]
@@ -147,7 +147,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-4-1-5jnkkb.jpg",
               "alt": "Velorun shoe box"
             }
           ]
@@ -157,7 +157,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-5-1-cf85z5.jpg",
               "alt": "Velorun magazine spread"
             }
           ]
@@ -167,15 +167,15 @@
           "columns": 3,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-6-1-bozlt1.jpg",
               "alt": "Velorun tank top"
             },
             {
-              "src": "",
+              "src": "images/velorun-6-2-c2jgtp.jpg",
               "alt": "Velorun gloves"
             },
             {
-              "src": "",
+              "src": "images/velorun-6-3-oxw0lg.jpg",
               "alt": "Velorun shorts"
             }
           ]
@@ -185,7 +185,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/velorun-7-1-iqaijt.jpg",
               "alt": "Velorun Instagram profile mockup"
             }
           ]
@@ -198,7 +198,7 @@
       "category": "Editorial design",
       "year": "2025",
       "featured": true,
-      "cover": "",
+      "cover": "images/altum-magazine-cover-ylrvj1.jpg",
       "coverAlt": "Altum magazine cover on a black grid",
       "coverFocus": {
         "x": 50,
@@ -213,7 +213,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/altum-magazine-1-1-s8tiwe.jpg",
               "alt": "Altum magazine cover"
             }
           ]
@@ -223,7 +223,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/altum-magazine-2-1-j2h81g.jpg",
               "alt": "Altum magazine full layout"
             }
           ]
@@ -321,16 +321,65 @@
       "category": "Type design",
       "year": "2024",
       "featured": false,
-      "cover": "",
+      "cover": "images/modulo-font-cover-xzceft.jpg",
       "coverAlt": "Letters carved into a stone fragment",
       "coverFocus": {
         "x": 50,
         "y": 50
       },
       "hero": "",
-      "intro": "Project description to be added.",
+      "intro": "Modulo is a geometric sans-serif typeface developed as a type design exercise. Built on a square module, it explores consistency and proportion through simple shapes, resulting in a clean and functional visual system.",
       "exploreLabel": "→EXPLORE ANOTHER PROJECTS←",
-      "blocks": []
+      "blocks": [
+        {
+          "type": "images",
+          "columns": 1,
+          "images": [
+            {
+              "src": "images/modulo-font-1-1-fjjkc9.png",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "columns": 1,
+          "images": [
+            {
+              "src": "images/modulo-font-2-1-7a09xu.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "columns": 1,
+          "images": [
+            {
+              "src": "images/modulo-font-3-1-q1855o.png",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "columns": 3,
+          "images": [
+            {
+              "src": "images/modulo-font-4-1-ao91fg.jpg",
+              "alt": ""
+            },
+            {
+              "src": "images/modulo-font-4-2-ibna3o.jpg",
+              "alt": ""
+            },
+            {
+              "src": "images/modulo-font-4-3-eu1nqd.jpg",
+              "alt": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "brutalism-map-series",
