@@ -60,26 +60,19 @@ function pic(src, alt, o, { ph = '16/9', style = '', eager = false, phClass = ''
 
 const fit = (cls, text) => `<div class="${cls}" data-fit><span class="fit-in">${esc(text)}</span></div>`;
 
-function row(r = {}, { dia = true } = {}) {
-  return `<div class="row"><span class="row-l">${dia ? '<i class="dia"></i>' : ''}${esc(r.left)}</span><span class="row-c">${esc(r.center)}</span><span class="row-r">${esc(r.right)}</span></div>`;
+function row(r = {}, { dia = true, ap = false } = {}) {
+  return `<div class="row"><span class="row-l">${dia ? '<i class="dia"></i>' : ''}${esc(r.left)}</span><span class="row-c">${esc(r.center)}</span><span class="row-r"${ap ? ' data-ap="rowr"' : ''}>${esc(r.right)}</span></div>`;
 }
 
-// croci luminose in alto nella hero (coordinate in unità della griglia di "+")
-function marks() {
-  const pts = [[1.5, 0.5], [0.5, 1.5], [1.5, 1.5], [0.5, 2.5], [1.5, 2.5], [0.5, 3.5]];
-  const d = pts.map(([x, y]) => `M${x} ${y - 0.14}v.28M${x - 0.14} ${y}h.28`).join('');
-  return `<svg class="marks" viewBox="0 0 2 4" aria-hidden="true"><path d="${d}"/></svg>`;
-}
-const PLUS = '<svg class="pm" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0v10M0 5h10"/></svg>';
 
 function header(c, path) {
   const nav = (c.nav || [])
     .map((n) => {
       const cur = n.href !== '/' && path.startsWith(n.href) ? ' aria-current="page"' : '';
-      return `<a href="${esc(n.href)}"${cur}>${esc(n.label)}${n.number ? `<sup>${esc(n.number)}</sup>` : ''}</a>`;
+      return `<a href="${esc(n.href)}"${cur}${n.href === '/contact/' ? ' data-ap="navlast"' : ''}>${esc(n.label)}${n.number ? `<sup>${esc(n.number)}</sup>` : ''}</a>`;
     })
     .join('');
-  return `<header class="hdr"><a class="hdr-name" href="/">${esc(c.site.name)}</a><nav class="hdr-nav" aria-label="Main">${nav}</nav></header>`;
+  return `<header class="hdr" data-ap="hdr"><a class="hdr-name" href="/">${esc(c.site.name)}</a><nav class="hdr-nav" aria-label="Main">${nav}</nav></header>`;
 }
 
 function footer(c, o) {
@@ -88,7 +81,8 @@ function footer(c, o) {
     ? `<img class="route" src="${esc(o.img(f.routeImage))}" alt="" loading="lazy">`
     : `<svg class="route" viewBox="0 0 850 150" aria-hidden="true"><path d="${ROUTE_D}"/><rect x="24" y="106" width="12" height="12"/><circle cx="828" cy="90" r="8"/></svg>`;
   const links = (f.links || []).map((l) => `<a href="${esc(l.href)}"${linkAttrs(l.href)}><span class="ar">↘︎</span>${esc(l.label)}</a>`).join('');
-  return `<footer class="ftr grid-bg" data-theme="blue">
+  return `<footer class="ftr" data-theme="blue">
+  <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${fit('ftr-word', f.wordmark || c.site.name)}
   <div class="ftr-mid">${route}<nav class="ftr-links" aria-label="Footer">${links}</nav></div>
   <div class="ftr-copy">${esc(f.copyright)}</div>
@@ -122,12 +116,10 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(
 </head>
 <body class="${bodyClass}${o.preview ? ' is-preview' : ''}">
 <script>document.documentElement.classList.add('js')</script>
-${header(c, path)}
 <main>
 ${main}
 </main>
 ${footer(c, o)}
-<div class="ruler" aria-hidden="true"><i></i></div>
 <script src="${esc(o.asset('assets/site.js'))}" defer></script>
 </body>
 </html>`;
@@ -136,7 +128,7 @@ ${footer(c, o)}
 function projectCard(p, i, o, variant) {
   const f = p.coverFocus || { x: 50, y: 50 };
   const style = `object-position:${Number(f.x ?? 50)}% ${Number(f.y ?? 50)}%`;
-  return `<a class="pcard pcard--${variant} reveal" href="/work/portfolio/${esc(p.slug)}/">
+  return `<a class="pcard pcard--${variant}" href="/work/portfolio/${esc(p.slug)}/">
   <div class="pimg">${pic(p.cover, p.coverAlt || p.title, o, { ph: variant === 'wide' ? '2.8/1' : '1.4/1', style })}</div>
   <div class="pcap"><span class="pc-i">(${pad2(i + 1)})</span><span class="pc-t"><b>${esc(p.title)}</b><em>${esc(p.category)}</em></span><span class="pc-y">© ${esc(p.year)}</span></div>
 </a>`;
@@ -146,17 +138,19 @@ function renderHome(c, path, o) {
   const h = c.home;
   const feat = (c.projects || []).filter((p) => p.featured);
   const hero = h.heroImage
-    ? `<img class="hero-img" src="${esc(o.img(h.heroImage))}" alt="" fetchpriority="high">`
+    ? `<img class="hero-img" data-ap="bg" src="${esc(o.img(h.heroImage))}" alt="" fetchpriority="high">`
     : '';
   const about = (h.aboutText || '').split(/\n/).map((t) => esc(t)).join('<br>');
   const main = `
-<section class="hero grid-bg" data-theme="blue">
+<section class="hero" data-theme="blue">
   ${hero}
-  ${marks()}
-  <div class="hero-foot">${esc(h.heroNote)}</div>
+  <div class="plusgrid" data-grid aria-hidden="true"></div>
+  ${header(c, path)}
+  <div class="hero-foot" data-ap="foot">${esc(h.heroNote)}</div>
 </section>
+<div class="curtain">
 ${row(h.aboutRow)}
-<section class="about reveal">
+<section class="about">
   <figure class="portrait">${pic(h.portrait, h.portraitAlt, o, { ph: '3/4' })}</figure>
   <span class="about-arrow" aria-hidden="true">→</span>
   <p class="about-text">${about}</p>
@@ -166,7 +160,8 @@ ${row(h.projectsRow)}
   ${fit('giant', h.projectsHeading)}
   <div class="plist">${feat.map((p, i) => projectCard(p, i, o, 'wide')).join('')}</div>
   <a class="cta" href="/work/portfolio/">${fit('cta-in', h.viewAllLabel)}</a>
-</section>`;
+</section>
+</div>`;
   const s = c.site;
   const jsonld = {
     '@context': 'https://schema.org', '@type': 'Person', name: s.author, jobTitle: s.jobTitle,
@@ -179,16 +174,20 @@ ${row(h.projectsRow)}
 function renderPortfolio(c, path, o) {
   const p = c.portfolio;
   const heroSrc = p.heroImage || c.home.heroImage;
-  const hero = heroSrc ? `<img class="hero-img" src="${esc(o.img(heroSrc))}" alt="" fetchpriority="high">` : '';
+  const hero = heroSrc ? `<img class="hero-img" data-ap="bg" src="${esc(o.img(heroSrc))}" alt="" fetchpriority="high">` : '';
   const main = `
-<section class="hero hero--page grid-bg" data-theme="blue">
+<section class="hero hero--page" data-theme="blue">
   ${hero}
-  <h1 class="hero-title">${esc(p.title)}</h1>
+  <div class="plusgrid" data-grid aria-hidden="true"></div>
+  ${header(c, path)}
+  <h1 class="hero-title" data-ap="ptitle">${esc(p.title)}</h1>
 </section>
-${row(p.row)}
+<div class="curtain">
+${row(p.row, { ap: true })}
 <section class="projects projects--grid" id="work">
-  <div class="pgrid">${(c.projects || []).map((pr, i) => projectCard(pr, i, o, 'card')).join('')}</div>
-</section>`;
+  <div class="pgrid" data-ap="work">${(c.projects || []).map((pr, i) => projectCard(pr, i, o, 'card')).join('')}</div>
+</section>
+</div>`;
   return layout(c, path, o, {
     title: `Portfolio — ${c.site.author}`, description: c.site.description, bodyClass: 'page-portfolio', main,
   });
@@ -197,13 +196,13 @@ ${row(p.row)}
 function renderBlocks(p, o) {
   return (p.blocks || [])
     .map((b, bi) => {
-      if (b.type === 'text') return `<p class="ptext reveal">${nl2br(b.text)}</p>`;
+      if (b.type === 'text') return `<p class="ptext">${nl2br(b.text)}</p>`;
       const cols = Math.min(3, Math.max(1, Number(b.columns) || 1));
       const ph = cols === 1 ? '16/9' : cols === 2 ? '4/3' : '4/5';
       const figs = (b.images || [])
         .map((im, ii) => `<figure>${pic(im.src, im.alt || `${p.title} — ${bi + 1}.${ii + 1}`, o, { ph })}</figure>`)
         .join('');
-      return `<div class="gal gal--${cols} reveal">${figs}</div>`;
+      return `<div class="gal gal--${cols} ">${figs}</div>`;
     })
     .join('\n');
 }
@@ -211,21 +210,22 @@ function renderBlocks(p, o) {
 function renderProject(c, path, o, p) {
   const heroSrc = p.hero || p.cover;
   const hero = heroSrc
-    ? `<img class="hero-img hero-img--cover" src="${esc(o.img(heroSrc))}" alt="" fetchpriority="high">`
+    ? `<img class="hero-img hero-img--cover" data-ap="pbg" src="${esc(o.img(heroSrc))}" alt="" fetchpriority="high">`
     : '';
   const main = `
-<section class="phero grid-bg" data-theme="blue">
+<section class="phero" data-theme="dark">
   ${hero}
-  <div class="phero-shade"></div>
-  <span class="pm-pos pm-tl">${PLUS}</span><span class="pm-pos pm-bl">${PLUS}</span><span class="pm-pos pm-tr">${PLUS}</span><span class="pm-pos pm-br">${PLUS}</span>
-  <h1 class="phero-title">${esc(p.title)}</h1>
+  ${header(c, path)}
+  <h1 class="phero-title" data-ap="ptitle2">${esc(p.title)}</h1>
 </section>
+<div class="curtain">
 ${row(c.site.projectRow)}
-<section class="pintro reveal"><p>${nl2br(p.intro)}</p></section>
+<section class="pintro"><p>${nl2br(p.intro)}</p></section>
 <section class="pblocks">
 ${renderBlocks(p, o)}
 </section>
-<a class="explore" href="/work/portfolio/#work">${fit('explore-in', p.exploreLabel)}</a>`;
+<a class="explore cta" href="/work/portfolio/#work">${fit('explore-in', p.exploreLabel)}</a>
+</div>`;
   const desc = String(p.intro || c.site.description).replace(/\s+/g, ' ').slice(0, 160);
   return layout(c, path, o, {
     title: `${p.title} — ${c.site.author}`, description: desc, ogImage: p.cover || p.hero, bodyClass: 'page-project', main,
@@ -238,10 +238,12 @@ function renderContact(c, path, o) {
     .map((l) => `<li><a href="${esc(l.href)}"${linkAttrs(l.href)}><span class="ar">→</span>${esc(l.label)}</a></li>`)
     .join('');
   const main = `
-<section class="contact grid-bg" data-theme="blue">
-  <figure class="portrait portrait--contact">${pic(k.portrait, k.portraitAlt, o, { ph: '4/5', phClass: 'ph--blue' })}</figure>
+<section class="contact" data-theme="blue">
+  <div class="plusgrid" data-grid aria-hidden="true"></div>
+  ${header(c, path)}
+  <figure class="portrait portrait--contact" data-ap="cimg">${pic(k.portrait, k.portraitAlt, o, { ph: '4/5', phClass: 'ph--blue' })}</figure>
   <div class="contact-r">
-    <h1>${esc(k.heading)}</h1>
+    <h1 data-ap="ctitle">${esc(k.heading)}</h1>
     <ul>${links}</ul>
   </div>
 </section>`;
@@ -251,7 +253,7 @@ function renderContact(c, path, o) {
 }
 
 function render404(c, o) {
-  const main = `<section class="contact grid-bg" data-theme="blue"><div class="contact-r" style="grid-column:1/-1"><h1>PAGE NOT FOUND</h1><ul><li><a href="/"><span class="ar">→</span>Back to home</a></li></ul></div></section>`;
+  const main = `<section class="contact" data-theme="blue">${header(c, '/404')}<div class="contact-r" style="grid-column:1/-1"><h1>PAGE NOT FOUND</h1><ul><li><a href="/"><span class="ar">→</span>Back to home</a></li></ul></div></section>`;
   return layout(c, '/404', o, { title: `Not found — ${c.site.author}`, description: c.site.description, bodyClass: 'page-contact', main });
 }
 

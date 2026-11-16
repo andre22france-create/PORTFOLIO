@@ -22,7 +22,7 @@ Editor (/admin)  ──Pubblica──▶  GitHub (repository)  ──▶  Cloudf
 | `images/` | Immagini del sito (le aggiunge l'editor) |
 | `fonts/` | Qui vanno i file di **Apfel Grotezk** (vedi `fonts/LEGGIMI.txt`) |
 | `src/site.css` | Stile del sito. I valori (blu `#0028D7`, dimensioni dei testi, spaziature) sono in cima, in `:root` |
-| `src/site.js` | Titoli a tutta larghezza, comparsa allo scroll, righello in basso a destra |
+| `src/site.js` | Titoli a tutta larghezza, griglia di “+” interattiva, cursore a mirino |
 | `src/render.js` | Genera l'HTML di ogni pagina |
 | `admin/` | L'editor |
 | `build.js` | Generatore del sito |
@@ -37,18 +37,19 @@ Copia `ApfelGrotezk-Regular.woff2` (o `.otf`) in `fonts/`. Dettagli in `fonts/LE
 2. Carica **tutto il contenuto di questa cartella** nel repository (sul sito: *Add file → Upload files*, oppure con GitHub Desktop).
    `dist/` e `node_modules/` sono già esclusi da `.gitignore`.
 
-### 3. Cloudflare Pages (hosting gratuito)
-1. Crea un account su cloudflare.com → *Workers & Pages* → *Create* → *Pages* → *Connect to Git* → scegli il repository.
+### 3. Cloudflare (hosting gratuito)
+1. Crea un account su cloudflare.com → *Workers & Pages* → *Create* → collega il repository GitHub.
 2. Impostazioni di build:
-   * **Build command:** `node build.js`
-   * **Build output directory:** `dist`
-   * (se la build fallisce per la versione di Node, aggiungi la variabile d'ambiente `NODE_VERSION` = `20`)
-3. Salva e distribuisci: ottieni un indirizzo `xxxx.pages.dev` per provare il sito.
+   * **Build command:** `node build.js`  (attenzione: con `node` davanti, non solo `build.js`)
+   * **Deploy command:** `npx wrangler deploy`  (è già il valore di default)
+   * Il file `wrangler.jsonc` nel repository dice a Cloudflare di pubblicare la cartella `dist`. Il campo `name` deve essere uguale al nome del progetto su Cloudflare (di default `portfolio`).
+   * Se Cloudflare ti propone invece il flusso "Pages" (con *Build output directory*), usa `node build.js` e `dist`.
+3. Salva e distribuisci: ottieni un indirizzo `xxxx.workers.dev` (o `xxxx.pages.dev`) per provare il sito.
 
-> I nomi dei menu di Cloudflare possono cambiare nel tempo: se qualcosa non corrisponde, la logica resta questa.
+> I nomi dei menu di Cloudflare cambiano spesso: se qualcosa non corrisponde, la logica resta questa.
 
 ### 4. Il tuo dominio
-Nel progetto Pages: *Custom domains* → aggiungi il dominio e segui le istruzioni mostrate da Cloudflare.
+Nel progetto: *Domains* / *Custom domains* → aggiungi il dominio e segui le istruzioni mostrate da Cloudflare.
 In genere si fa in uno di questi due modi (Cloudflare ti dice quale serve per il tuo caso):
 * sposti i nameserver del dominio su Cloudflare, oppure
 * aggiungi un record DNS **CNAME** presso il sito dove hai comprato il dominio.
@@ -98,12 +99,12 @@ In locale l'editor funziona e mostra l'anteprima, ma per pubblicare serve il col
 * **Solo inglese** per ora: i testi sono tutti in `content.json`, quindi una versione italiana si può aggiungere dopo.
 * **Video** non sono gestiti dall'editor (solo immagini, SVG e GIF).
 
-## Elementi ricostruiti a occhio (da verificare contro l'originale Framer)
-Dagli screenshot non si vedono animazioni né i file originali, quindi questi punti sono una mia interpretazione:
+## Animazioni (lette dal sito Framer pubblicato) e cosa resta approssimato
+Replicati con i valori originali: entrata di header/menu/immagini/titoli (molla 60/300 e curve estratte), griglia di “+” che si illumina vicino al mouse (passo 60px, raggio 150px), cursore a mirino con inversione colore, bottone “VIEW ALL PROJECTS” (blu → trasparente al passaggio), hero ferma con contenuto che le scorre sopra (“tenda”), card progetto che si impilano.
+Ancora ricostruito a occhio, da verificare:
 * la **linea del percorso** nel footer è un disegno approssimato (carica l'SVG/PNG originale da *Header e footer → Linea del percorso*);
-* le **croci luminose** in alto nella home e la griglia di “+”;
-* il **righello** in basso a destra: qui avanza con lo scroll;
-* **animazioni**: comparsa morbida allo scroll e leggero zoom delle copertine al passaggio del mouse;
-* **header** non fisso (scorre via con la pagina);
+* lo **sfondo della hero nelle pagine progetto** è nero con l'immagine al 70% (come misurato sul body Framer), non verificato su un progetto con immagine;
+* animazione di scroll del footer, hover sul menu e “morbidezza” del cursore: non trovati nel sito originale, quindi assenti;
+* il cursore nasconde quello di sistema solo con mouse (non su touch).
 * le **misure dei testi** sono ricavate dalle proporzioni degli screenshot: si regolano in `src/site.css`, blocco `:root`;
 * nel sito originale il pulsante recitava “WIEW ALL PROJECTS”: qui è **“VIEW ALL PROJECTS”** (modificabile dall'editor, pagina Home).
