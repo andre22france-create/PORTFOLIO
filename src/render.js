@@ -68,7 +68,7 @@ function row(r = {}, { dia = true, ap = false } = {}) {
 function header(c, path) {
   const nav = (c.nav || [])
     .map((n) => {
-      const cur = n.href !== '/' && path.startsWith(n.href) ? ' aria-current="page"' : '';
+      const cur = n.href !== '/' && path === n.href ? ' aria-current="page"' : '';
       return `<a href="${esc(n.href)}"${cur}${n.href === '/contact/' ? ' data-ap="navlast"' : ''}>${esc(n.label)}${n.number ? `<sup>${esc(n.number)}</sup>` : ''}</a>`;
     })
     .join('');
@@ -147,6 +147,7 @@ function renderHome(c, path, o) {
   <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${header(c, path)}
   <div class="hero-foot" data-ap="foot">${esc(h.heroNote)}</div>
+  <div class="hero-dim" aria-hidden="true"></div>
 </section>
 <div class="curtain">
 ${row(h.aboutRow)}

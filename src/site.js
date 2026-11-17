@@ -79,6 +79,20 @@
     if (!mraf) mraf = requestAnimationFrame(lightUp);
   }, { passive: true });
 
+  // 2b) Hero della home: si scurisce con lo scroll (luminosità ≈ 1 − scroll / (1.28 × altezza hero))
+  var dim = doc.querySelector('.hero-dim');
+  if (dim && !reduce) {
+    var draf;
+    var tickDim = function () {
+      draf = 0;
+      var hh = dim.parentElement.offsetHeight || 1;
+      dim.style.opacity = Math.max(0, Math.min(1, window.scrollY / (1.28 * hh))).toFixed(3);
+    };
+    window.addEventListener('scroll', function () { if (!draf) draf = requestAnimationFrame(tickDim); }, { passive: true });
+    window.addEventListener('resize', tickDim);
+    tickDim();
+  }
+
   // 3) Cursore a mirino (solo con mouse), si inverte sullo sfondo
   if (fine) {
     var cur = doc.createElement('div');

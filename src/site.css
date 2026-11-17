@@ -81,10 +81,13 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .contact .hdr { z-index: 10; }
 .hdr-name { font-size: var(--fs-name); line-height: 1.2; }
 .hdr-nav { display: flex; gap: 80px; padding-top: 7px; margin-right: 20px; font-size: var(--fs-nav); line-height: 20px; letter-spacing: -.5px; }
+/* come le varianti Framer "Portfolio Active" / "Contact Active": voce attiva sottolineata, l'altra attenuata */
+.hdr-nav:has(a[aria-current]) a:not([aria-current]) { opacity: .5; }
+.hdr-nav a[aria-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .hdr-nav sup { font-size: 12px; line-height: 16px; letter-spacing: -.5px; opacity: .5; margin-left: 12px; vertical-align: top; position: relative; top: -4px; }
 
 /* ---------- Hero ---------- */
-.hero { overflow: hidden; height: clamp(480px, 46.6vw, 100svh); }
+.hero { overflow: hidden; height: 90svh; min-height: 420px; } /* Framer: Hero alta 90vh */
 .hero-img {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: 50% 100%;
@@ -147,11 +150,15 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .pc-t em { display: block; font-style: normal; text-transform: none; opacity: .6; }
 .pc-y { text-align: right; }
 
+/* La hero della home si scurisce mentre il contenuto bianco le scorre sopra
+   (misurato frame per frame da una registrazione dell'anteprima Framer). */
+.hero-dim { position: absolute; inset: 0; z-index: 20; background: #000; opacity: 0; pointer-events: none; transition: opacity .12s linear; }
+
 /* bottone: blu → trasparente, testo bianco → blu (molla bounce .2, 0.4s) */
 .cta {
   display: block; margin: 4.8vw 0 6.8vw;
-  background-color: var(--blue); color: #fff; border-radius: var(--radius);
-  padding: 1.7vw 2.2vw 1.9vw;
+  background-color: var(--blue); color: #fff; border: 2px solid var(--blue); border-radius: var(--radius);
+  padding: calc(1.7vw - 2px) calc(2.2vw - 2px) calc(1.9vw - 2px);
   transition: background-color .4s cubic-bezier(.3, .9, .4, 1.1), color .4s cubic-bezier(.3, .9, .4, 1.1);
 }
 .cta:hover { background-color: rgba(0, 40, 215, 0); color: var(--blue); }
@@ -263,7 +270,6 @@ img.route { stroke: none; }
   .hero-foot { display: none; }
   .phero-title { font-size: 11vw; line-height: 1; letter-spacing: -.03em; }
   .phero { height: 100svh; }
-  .hero { height: clamp(420px, 120vw, 100svh); }
   .row { margin-top: 24px; }
   .row-c { left: 56%; }
   .about { grid-template-columns: 1fr; padding: 40px 0; row-gap: 28px; }
