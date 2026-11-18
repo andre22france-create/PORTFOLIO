@@ -127,14 +127,14 @@
 
   // 3) Cursore a mirino (solo con mouse), si inverte sullo sfondo
   if (fine) {
-    var cur = doc.createElement('div');
-    cur.className = 'cursor'; cur.setAttribute('aria-hidden', 'true');
-    cur.innerHTML = '<svg viewBox="0 0 44 44"><path d="M 22.5 13.904 C 24.525 14.014 26.269 14.802 27.734 16.266 C 29.198 17.731 29.986 19.475 30.096 21.5 L 44 21.5 L 44 22.5 L 30.096 22.5 C 29.986 24.525 29.198 26.269 27.734 27.734 C 26.269 29.198 24.525 29.986 22.5 30.096 L 22.5 44 L 21.5 44 L 21.5 30.096 C 19.475 29.986 17.731 29.198 16.266 27.734 C 14.802 26.269 14.014 24.525 13.904 22.5 L 0 22.5 L 0 21.5 L 13.904 21.5 C 14.014 19.475 14.802 17.731 16.266 16.266 C 17.731 14.802 19.475 14.014 21.5 13.904 L 21.5 0 L 22.5 0 Z M 16.973 16.973 C 15.704 18.242 15.015 19.751 14.906 21.5 L 21.5 21.5 L 21.5 14.906 C 19.751 15.015 18.242 15.704 16.973 16.973 Z M 22.5 21.5 L 29.094 21.5 C 28.985 19.751 28.296 18.242 27.027 16.973 C 25.758 15.704 24.249 15.015 22.5 14.906 Z M 14.906 22.5 C 15.015 24.249 15.704 25.758 16.973 27.027 C 18.242 28.296 19.751 28.985 21.5 29.094 L 21.5 22.5 Z M 22.5 29.094 C 24.249 28.985 25.758 28.296 27.027 27.027 C 28.296 25.758 28.985 24.249 29.094 22.5 L 22.5 22.5 Z"/></svg>';
-    doc.body.appendChild(cur);
+    var reticle = doc.createElement('div');
+    reticle.className = 'cursor'; reticle.setAttribute('aria-hidden', 'true');
+    reticle.innerHTML = '<svg viewBox="0 0 44 44"><path d="M 22.5 13.904 C 24.525 14.014 26.269 14.802 27.734 16.266 C 29.198 17.731 29.986 19.475 30.096 21.5 L 44 21.5 L 44 22.5 L 30.096 22.5 C 29.986 24.525 29.198 26.269 27.734 27.734 C 26.269 29.198 24.525 29.986 22.5 30.096 L 22.5 44 L 21.5 44 L 21.5 30.096 C 19.475 29.986 17.731 29.198 16.266 27.734 C 14.802 26.269 14.014 24.525 13.904 22.5 L 0 22.5 L 0 21.5 L 13.904 21.5 C 14.014 19.475 14.802 17.731 16.266 16.266 C 17.731 14.802 19.475 14.014 21.5 13.904 L 21.5 0 L 22.5 0 Z M 16.973 16.973 C 15.704 18.242 15.015 19.751 14.906 21.5 L 21.5 21.5 L 21.5 14.906 C 19.751 15.015 18.242 15.704 16.973 16.973 Z M 22.5 21.5 L 29.094 21.5 C 28.985 19.751 28.296 18.242 27.027 16.973 C 25.758 15.704 24.249 15.015 22.5 14.906 Z M 14.906 22.5 C 15.015 24.249 15.704 25.758 16.973 27.027 C 18.242 28.296 19.751 28.985 21.5 29.094 L 21.5 22.5 Z M 22.5 29.094 C 24.249 28.985 25.758 28.296 27.027 27.027 C 28.296 25.758 28.985 24.249 29.094 22.5 L 22.5 22.5 Z"/></svg>';
+    doc.body.appendChild(reticle);
     window.addEventListener('mousemove', function (e) {
-      cur.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
-      if (!cur.classList.contains('on')) { cur.classList.add('on'); doc.documentElement.classList.add('has-cursor'); }
+      reticle.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+      if (!reticle.classList.contains('on')) { reticle.classList.add('on'); doc.documentElement.classList.add('has-cursor'); }
     }, { passive: true });
-    doc.documentElement.addEventListener('mouseleave', function () { cur.classList.remove('on'); doc.documentElement.classList.remove('has-cursor'); });
+    doc.documentElement.addEventListener('mouseleave', function () { reticle.classList.remove('on'); doc.documentElement.classList.remove('has-cursor'); });
   }
 })();
