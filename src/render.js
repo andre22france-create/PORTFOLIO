@@ -240,7 +240,6 @@ function renderContact(c, path, o) {
     .join('');
   const main = `
 <section class="contact" data-theme="blue">
-  <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${header(c, path)}
   <figure class="portrait portrait--contact" data-ap="cimg">${pic(k.portrait, k.portraitAlt, o, { ph: '4/5', phClass: 'ph--blue' })}</figure>
   <div class="contact-r">

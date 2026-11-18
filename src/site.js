@@ -93,6 +93,38 @@
     tickDim();
   }
 
+  // 2c) Scroll fluido (stile Lenis, come il componente "Smooth Scroll" di Framer):
+  //     la rotella sposta un bersaglio e la pagina lo insegue con un'interpolazione.
+  if (!reduce && fine) {
+    var target = window.scrollY, cur = window.scrollY, running = false, LERP = 0.085;
+    var maxScroll = function () { return doc.documentElement.scrollHeight - window.innerHeight; };
+    var step = function () {
+      cur += (target - cur) * LERP;
+      if (Math.abs(target - cur) < 0.3) { cur = target; running = false; }
+      window.scrollTo(0, cur);
+      if (running) requestAnimationFrame(step);
+    };
+    doc.documentElement.classList.add('smooth');
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey || e.defaultPrevented) return;           // zoom
+      var el = e.target, scrollable = false;
+      while (el && el !== doc.body && el.nodeType === 1) {   // lascia stare aree scorrevoli interne
+        var cs = getComputedStyle(el);
+        if (/(auto|scroll)/.test(cs.overflowY) && el.scrollHeight > el.clientHeight) { scrollable = true; break; }
+        el = el.parentElement;
+      }
+      if (scrollable) return;
+      e.preventDefault();
+      var dy = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+      if (!running) cur = window.scrollY;
+      target = Math.max(0, Math.min(maxScroll(), (running ? target : cur) + dy));
+      if (!running) { running = true; requestAnimationFrame(step); }
+    }, { passive: false });
+    // tastiera, barra di scorrimento e link ancora: riallinea il bersaglio
+    window.addEventListener('scroll', function () { if (!running) { target = cur = window.scrollY; } }, { passive: true });
+    window.addEventListener('keydown', function () { running = false; target = cur = window.scrollY; });
+  }
+
   // 3) Cursore a mirino (solo con mouse), si inverte sullo sfondo
   if (fine) {
     var cur = doc.createElement('div');
