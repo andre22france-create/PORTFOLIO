@@ -253,7 +253,7 @@
       "category": "Branding",
       "year": "2026",
       "featured": true,
-      "cover": "",
+      "cover": "images/banka-festival-cover-tec4p5.jpg",
       "coverAlt": "Close-up of a dandelion in blue and orange tones",
       "coverFocus": {
         "x": 50,
@@ -268,7 +268,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/banka-festival-1-1-ut4adm.jpg",
               "alt": "Banka Festival visual 1"
             }
           ]
@@ -278,7 +278,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/banka-festival-2-1-mgante.jpg",
               "alt": "Banka Festival visual 2"
             }
           ]
@@ -288,7 +288,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/banka-festival-3-1-2f9h2y.jpg",
               "alt": "Banka Festival visual 3"
             }
           ]
@@ -298,7 +298,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/banka-festival-4-1-wzxxdc.jpg",
               "alt": "Banka Festival visual 4"
             }
           ]
@@ -308,7 +308,7 @@
           "columns": 1,
           "images": [
             {
-              "src": "",
+              "src": "images/banka-festival-5-1-hgkhu0.jpg",
               "alt": "Banka Festival visual 5"
             }
           ]
