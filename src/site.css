@@ -163,8 +163,8 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
    Su touch lo stato "premuto" (:active) mostra la versione bianca. */
 .cta {
   display: block; margin: 4.8vw 0 6.8vw;
-  background-color: var(--blue); color: #fff; border: 2px solid var(--blue); border-radius: var(--radius);
-  padding: calc(.25vw + 2px) calc(2.5% + 2px);
+  background-color: var(--blue); color: #fff; border: 6px solid var(--blue); border-radius: var(--radius);
+  padding: max(0px, calc(.25vw - 2px)) calc(2.5% - 2px); /* bordo 6px: il testo resta nella stessa posizione */
   transition: background-color .4s cubic-bezier(.3, .9, .4, 1.1), color .4s cubic-bezier(.3, .9, .4, 1.1);
   -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; user-select: none;
 }
@@ -287,7 +287,7 @@ img.route { stroke: none; }
   .plist { gap: 44px; }
   .pcard--wide .pimg { aspect-ratio: 1.5 / 1; }
   .pcap { --cap-x: 50% !important; margin-top: 8px; }
-  .cta { margin: 28px 0 40px; padding: calc(4px + 2px) calc(2.5% + 2px); }
+  .cta { margin: 28px 0 40px; padding: 2px calc(2.5% - 2px); }
   .pgrid { grid-template-columns: 1fr; row-gap: 36px; }
   .projects--grid { padding-top: 28px; padding-bottom: 60px; }
   .pintro { padding-top: 36px; }
