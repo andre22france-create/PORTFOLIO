@@ -26,6 +26,7 @@ fs.mkdirSync(path.join(dist, 'assets'), { recursive: true });
 const copyDir = (src, dst) => { if (fs.existsSync(src)) fs.cpSync(src, dst, { recursive: true }); };
 for (const f of ['site.css', 'site.js', 'render.js']) fs.copyFileSync(rd('src/' + f), path.join(dist, 'assets', f));
 copyDir(rd('fonts'), path.join(dist, 'fonts'));
+copyDir(rd('favicon'), path.join(dist, 'favicon'));
 copyDir(rd('images'), path.join(dist, 'images'));
 copyDir(rd('admin'), path.join(dist, 'admin'));
 fs.mkdirSync(path.join(dist, 'content'), { recursive: true });
@@ -68,7 +69,7 @@ if (base) {
   fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin/\n`);
   warnings.push('content.site.url è vuoto: canonical, sitemap e anteprime social sono disattivati finché non scrivi il dominio (Editor → Sito → "Indirizzo del sito").');
 }
-fs.writeFileSync(path.join(dist, '_headers'), `/admin/*\n  X-Robots-Tag: noindex\n  Cache-Control: no-store\n/content/*\n  Cache-Control: no-store\n/images/*\n  Cache-Control: public, max-age=86400\n/fonts/*\n  Cache-Control: public, max-age=31536000\n`);
+fs.writeFileSync(path.join(dist, '_headers'), `/admin/*\n  X-Robots-Tag: noindex\n  Cache-Control: no-store\n/content/*\n  Cache-Control: no-store\n/images/*\n  Cache-Control: public, max-age=86400\n/fonts/*\n  Cache-Control: public, max-age=31536000\n/favicon/*\n  Cache-Control: public, max-age=86400\n`);
 
 console.log(`Build ok: ${routes.length} pagine → dist/`);
 console.log(`Immagini ancora da inserire: ${empty}`);

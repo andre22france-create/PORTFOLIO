@@ -81,9 +81,12 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .contact .hdr { z-index: 10; }
 .hdr-name { font-size: var(--fs-name); line-height: 1.2; }
 .hdr-nav { display: flex; gap: 80px; padding-top: 7px; margin-right: 20px; font-size: var(--fs-nav); line-height: 20px; letter-spacing: -.5px; }
-/* come le varianti Framer "Portfolio Active" / "Contact Active": voce attiva sottolineata, l'altra attenuata */
-.hdr-nav:has(a[aria-current]) a:not([aria-current]) { opacity: .5; }
-.hdr-nav a[aria-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.hdr-nav a { position: relative; transition: opacity .4s cubic-bezier(.3, .9, .4, 1.1); }
+.hdr-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left center; transition: transform .4s cubic-bezier(.3, .9, .4, 1.1); }
+@media (hover: hover) {
+  .hdr-nav a:hover::after { transform: scaleX(1); }
+  .hdr-nav:hover a:not(:hover) { opacity: .5; }
+}
 .hdr-nav sup { font-size: 12px; line-height: 16px; letter-spacing: -.5px; opacity: .5; margin-left: 12px; vertical-align: top; position: relative; top: -4px; }
 
 /* ---------- Hero ---------- */
@@ -212,7 +215,8 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .route { width: 100%; height: auto; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; overflow: visible; margin-top: 1.2vw; }
 .route path, .route rect, .route circle { vector-effect: non-scaling-stroke; }
 img.route { stroke: none; }
-.ftr-links { text-align: right; font-size: var(--fs-ftr-link); line-height: 1.25; display: flex; flex-direction: column; }
+.ftr-home { display: block; }
+.ftr-links { align-items: flex-end; text-align: right; font-size: var(--fs-ftr-link); line-height: 1.25; display: flex; flex-direction: column; }
 .ftr-links a:hover { opacity: .75; }
 .ftr-copy { margin-top: 2.2vw; font-size: var(--fs-row); }
 

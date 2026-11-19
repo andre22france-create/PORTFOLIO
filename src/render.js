@@ -83,7 +83,7 @@ function footer(c, o) {
   const links = (f.links || []).map((l) => `<a href="${esc(l.href)}"${linkAttrs(l.href)}><span class="ar">↘︎</span>${esc(l.label)}</a>`).join('');
   return `<footer class="ftr" data-theme="blue">
   <div class="plusgrid" data-grid aria-hidden="true"></div>
-  ${fit('ftr-word', f.wordmark || c.site.name)}
+  <a class="ftr-home" href="/" aria-label="Home">${fit('ftr-word', f.wordmark || c.site.name)}</a>
   <div class="ftr-mid">${route}<nav class="ftr-links" aria-label="Footer">${links}</nav></div>
   <div class="ftr-copy">${esc(f.copyright)}</div>
 </footer>`;
@@ -108,7 +108,11 @@ ${canon}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 ${og ? `<meta property="og:image" content="${esc(abs(og))}"><meta name="twitter:card" content="summary_large_image">` : ''}
-${s.favicon ? `<link rel="icon" href="${esc(o.img(s.favicon))}">` : ''}
+${s.favicon
+  ? `<link rel="icon" href="${esc(o.img(s.favicon))}">`
+  : `<link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-light.png'))}" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-dark.png'))}" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="${esc(o.asset('favicon/apple-touch-icon.png'))}">`}
 <meta name="theme-color" content="#0028D7">
 <link rel="preload" href="${esc(o.asset('fonts/ApfelGrotezk-Regular.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${esc(o.asset('assets/site.css'))}">
