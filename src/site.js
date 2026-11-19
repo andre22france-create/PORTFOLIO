@@ -74,6 +74,15 @@
     buildGrids._t = setTimeout(function () { buildGrids(); }, 120);
   });
   window.addEventListener('load', buildGrids);
+  // ricostruisce la griglia se l'altezza del contenitore cambia (font/immagini caricati dopo, barra del browser mobile)
+  if (window.ResizeObserver) {
+    var gridSizes = '';
+    var ro = new ResizeObserver(function () {
+      var sig = Array.prototype.map.call(doc.querySelectorAll('[data-grid]'), function (h) { return h.clientWidth + 'x' + h.clientHeight; }).join();
+      if (sig !== gridSizes) { gridSizes = sig; buildGrids(); }
+    });
+    Array.prototype.forEach.call(doc.querySelectorAll('[data-grid]'), function (h) { ro.observe(h); });
+  }
   if (!reduce) window.addEventListener('mousemove', function (e) {
     mx = e.clientX; my = e.clientY;
     if (!mraf) mraf = requestAnimationFrame(lightUp);

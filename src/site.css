@@ -38,7 +38,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; background: var(--blue); } /* blu sotto al footer (overscroll / barra Safari), come nella pagina contatti */
 body {
   margin: 0;
   font-family: var(--font);
