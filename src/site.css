@@ -123,7 +123,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .portrait { border-radius: var(--radius); overflow: hidden; }
 .portrait img, .portrait .ph { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3/4; }
 .about-arrow { font-size: var(--fs-row); margin-left: calc(56.7vw - 22.5vw - var(--gut) * 2); line-height: 1; padding-top: .1em; }
-.about-text { grid-column: 3; font-size: var(--fs-about); line-height: 1.16; text-align: justify; hyphens: auto; }
+.about-text { grid-column: 3; font-size: 16px; line-height: 20.2px; text-align: justify; hyphens: auto; } /* Framer: Body 1 — 16px / 20.2, giustificato */
 
 /* ---------- Titoli giganti con "fit" ---------- */
 [data-fit] { display: block; width: 100%; white-space: nowrap; overflow: visible; line-height: .8; letter-spacing: -.03em; font-size: 15vw; }
@@ -182,7 +182,15 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   padding: 0 var(--gut); color: #fff;
 }
 .pintro { padding: 7vw var(--gut) 0; }
-.pintro p { font-size: var(--fs-intro); line-height: 1.16; letter-spacing: -.005em; }
+.pintro p { font-size: 36px; line-height: 38px; letter-spacing: -.005em; } /* Framer: Heading 6 — 36px / 38 */
+/* Text effect Framer: layer in view (start al centro), replay no, per riga, opacity 0 → 1, offset Y 10, spring, delay 0 */
+@media (prefers-reduced-motion: no-preference) {
+  .js .pintro p:not(.split) { opacity: 0; }
+  .js .pintro .ln { display: block; opacity: 0; }
+  .js .pintro.is-in .ln { animation: ap-line 1.28s var(--spring) both; animation-delay: calc(var(--i) * .1s); }
+  .js .pintro.is-set .ln { opacity: 1; animation: none; }
+}
+@keyframes ap-line { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .pblocks { display: flex; flex-direction: column; gap: 50px; padding: 9vw var(--gut) 0; }
 .gal { display: grid; gap: 10px; }
 .gal--1 { grid-template-columns: 1fr; }
@@ -190,7 +198,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .gal--3 { grid-template-columns: repeat(3, 1fr); }
 .gal figure { border-radius: 5px; overflow: hidden; }
 .gal img { width: 100%; height: auto; }
-.ptext { font-size: var(--fs-about); line-height: 1.2; max-width: 52ch; padding: 2vw 0; }
+.ptext { font-size: clamp(14px, 1.25vw, 22px); line-height: 1.2; max-width: 52ch; padding: 2vw 0; }
 .explore { margin: 5.5vw var(--gut) 6vw; }
 .explore .explore-in { line-height: 1.2; letter-spacing: 0; }
 
@@ -268,7 +276,7 @@ img.route { stroke: none; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 809.98px) {
-  :root { --u: 8.2vw; --fs-name: 15px; --fs-nav: 13px; --fs-row: 12px; --fs-cap: 10px; --fs-about: 15px; --fs-intro: 19px; --fs-ftr-link: 17px; --fs-contact-h: 34px; --fs-contact-l: 20px; --fs-hero-title: 17vw; --fs-project-title: 11vw; --gut: 14px; }
+  :root { --u: 8.2vw; --fs-name: 15px; --fs-nav: 13px; --fs-row: 12px; --fs-cap: 10px; --fs-about: 15px; --fs-intro: 26px; --fs-ftr-link: 17px; --fs-contact-h: 34px; --fs-contact-l: 20px; --fs-hero-title: 17vw; --fs-project-title: 11vw; --gut: 14px; }
   .hdr { flex-direction: column; gap: 12px; }
   .hdr-name { white-space: nowrap; }
   .hdr-nav { gap: 22px; margin-right: 0; padding-top: 0; }
@@ -288,6 +296,7 @@ img.route { stroke: none; }
   .pgrid { grid-template-columns: 1fr; row-gap: 36px; }
   .projects--grid { padding-top: 28px; padding-bottom: 60px; }
   .pintro { padding-top: 36px; }
+  .pintro p { font-size: 26px; line-height: 28px; } /* Heading 6b — 26px / 28 */
   .pblocks { padding-top: 48px; }
   .gal--2, .gal--3 { grid-template-columns: 1fr; }
   .explore { margin: 36px var(--gut) 44px; }

@@ -134,4 +134,43 @@
   }
   // iOS: abilita lo stato :active (bottone bianco al tocco)
   doc.addEventListener('touchstart', function () {}, { passive: true });
+
+  // 3) Testo introduttivo dei progetti: effetto per riga (Framer "Text effect")
+  var intro = doc.querySelector('.pintro');
+  var ip = intro && intro.querySelector('p');
+  if (ip && !reduce && 'IntersectionObserver' in window) {
+    var src = ip.innerHTML.replace(/<br\s*\/?>/gi, '\n'), plain = doc.createElement('div');
+    plain.innerHTML = src; src = plain.textContent;
+    var played = false;
+    var splitLines = function () {
+      ip.classList.remove('split'); ip.textContent = '';
+      var parts = src.split('\n'), words = [];
+      parts.forEach(function (ln, li) {
+        ln.split(/\s+/).filter(Boolean).forEach(function (w) { var sp = doc.createElement('span'); sp.textContent = w + ' '; sp.style.display = 'inline'; sp._br = false; words.push(sp); ip.appendChild(sp); });
+        if (li < parts.length - 1 && words.length) { words[words.length - 1]._br = true; }
+      });
+      var lines = [], lastTop = null;
+      words.forEach(function (w) {
+        var t = w.offsetTop;
+        if (lastTop === null || Math.abs(t - lastTop) > 2) { lines.push([]); lastTop = t; }
+        lines[lines.length - 1].push(w.textContent);
+        if (w._br) lastTop = null;
+      });
+      ip.textContent = '';
+      lines.forEach(function (ws, i) {
+        var l = doc.createElement('span'); l.className = 'ln'; l.style.setProperty('--i', i); l.textContent = ws.join('').trim(); ip.appendChild(l);
+      });
+      ip.classList.add('split');
+      if (played) intro.classList.add('is-set');
+    };
+    var lastW = 0;
+    var doSplit = function () { splitLines(); lastW = ip.clientWidth; };
+    var start = function () { doSplit(); };
+    (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(start);
+    window.addEventListener('resize', function () { clearTimeout(splitLines._t); splitLines._t = setTimeout(function () { if (ip.clientWidth !== lastW) doSplit(); }, 150); });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting && !played) { played = true; intro.classList.add('is-in'); io.disconnect(); } });
+    }, { rootMargin: '0px 0px -50% 0px', threshold: 0 });
+    io.observe(ip);
+  }
 })();
