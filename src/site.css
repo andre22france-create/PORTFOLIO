@@ -154,9 +154,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .pc-t em { display: block; font-style: normal; text-transform: none; opacity: .6; }
 .pc-y { text-align: right; }
 
-/* La hero della home si scurisce mentre il contenuto bianco le scorre sopra
-   (misurato frame per frame da una registrazione dell'anteprima Framer). */
-.hero-dim { position: absolute; inset: 0; z-index: 20; background: #000; opacity: 0; pointer-events: none; transition: opacity .12s linear; }
 
 /* bottone (Framer: Variant 1 Primary → Hover): blu → trasparente con bordo, testo bianco → blu.
    Testo Apfel Grotezk Regular, letter-spacing 0, line-height 1.2, scalato per riempire la larghezza.

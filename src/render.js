@@ -149,7 +149,6 @@ function renderHome(c, path, o) {
   <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${header(c, path)}
   <div class="hero-foot" data-ap="foot">${esc(h.heroNote)}</div>
-  <div class="hero-dim" aria-hidden="true"></div>
 </section>
 <div class="curtain">
 ${row(h.aboutRow)}
