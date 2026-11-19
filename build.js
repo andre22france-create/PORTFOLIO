@@ -27,6 +27,7 @@ const copyDir = (src, dst) => { if (fs.existsSync(src)) fs.cpSync(src, dst, { re
 for (const f of ['site.css', 'site.js', 'render.js']) fs.copyFileSync(rd('src/' + f), path.join(dist, 'assets', f));
 copyDir(rd('fonts'), path.join(dist, 'fonts'));
 copyDir(rd('favicon'), path.join(dist, 'favicon'));
+fs.copyFileSync(rd('favicon/favicon.ico'), path.join(dist, 'favicon.ico')); // Google cerca /favicon.ico di default
 copyDir(rd('images'), path.join(dist, 'images'));
 copyDir(rd('admin'), path.join(dist, 'admin'));
 fs.mkdirSync(path.join(dist, 'content'), { recursive: true });
