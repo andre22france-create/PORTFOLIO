@@ -137,4 +137,6 @@
     }, { passive: true });
     doc.documentElement.addEventListener('mouseleave', function () { reticle.classList.remove('on'); doc.documentElement.classList.remove('has-cursor'); });
   }
+  // iOS: abilita lo stato :active (bottone bianco al tocco)
+  doc.addEventListener('touchstart', function () {}, { passive: true });
 })();
