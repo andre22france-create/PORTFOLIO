@@ -108,11 +108,9 @@ ${canon}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 ${og ? `<meta property="og:image" content="${esc(abs(og))}"><meta name="twitter:card" content="summary_large_image">` : ''}
-${s.favicon
-  ? `<link rel="icon" href="${esc(o.img(s.favicon))}">`
-  : `<link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-light.png'))}" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-light.png'))}" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-dark.png'))}" media="(prefers-color-scheme: dark)">
-<link rel="apple-touch-icon" href="${esc(o.asset('favicon/apple-touch-icon.png'))}">`}
+<link rel="apple-touch-icon" href="${esc(o.asset('favicon/apple-touch-icon.png'))}">
 <meta name="theme-color" content="#0028D7">
 <link rel="preload" href="${esc(o.asset('fonts/ApfelGrotezk-Regular.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${esc(o.asset('assets/site.css'))}">
