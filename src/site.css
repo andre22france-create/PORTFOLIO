@@ -222,14 +222,13 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .ftr { position: relative; z-index: 2; background-color: var(--blue); color: #fff; padding: 3vw var(--gut) var(--gut); }
 .ftr > *:not(.plusgrid) { position: relative; z-index: 2; }
 .ftr-word { color: #fff; margin-bottom: 3.2vw; }
-.ftr-mid { display: grid; grid-template-columns: 69% 1fr; align-items: start; }
-.route { width: 100%; height: auto; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; overflow: visible; margin-top: 1.2vw; }
-.route path, .route rect, .route circle { vector-effect: non-scaling-stroke; }
-img.route { stroke: none; }
+.ftr-mid { display: grid; grid-template-columns: 70% 1fr; grid-template-areas: "route links" "copy scale"; align-items: start; row-gap: 3.4vw; }
+.route { grid-area: route; width: 100%; height: auto; fill: #fff; display: block; }
+.scale { grid-area: scale; align-self: end; width: 86.7%; height: auto; fill: #fff; display: block; justify-self: end; }
 .ftr-home { display: block; }
-.ftr-links { align-items: flex-end; text-align: right; font-size: var(--fs-ftr-link); line-height: 1.25; display: flex; flex-direction: column; }
+.ftr-links { grid-area: links; justify-self: end; align-items: flex-end; text-align: right; font-size: var(--fs-ftr-link); line-height: 1.25; display: flex; flex-direction: column; }
 .ftr-links a:hover { opacity: .75; }
-.ftr-copy { margin-top: 2.2vw; font-size: var(--fs-row); }
+.ftr-copy { grid-area: copy; align-self: end; font-size: var(--fs-row); line-height: 1; }
 
 /* ---------- Segnaposto immagini ---------- */
 .ph {
@@ -306,9 +305,9 @@ img.route { stroke: none; }
   .contact-r h1 { margin-bottom: 26px; }
   .ftr { padding-top: 28px; }
   .ftr-word { margin-bottom: 22px; }
-  .ftr-mid { grid-template-columns: 1fr; row-gap: 18px; }
-  .ftr-links { order: -1; }
-  .ftr-copy { margin-top: 18px; }
+  .ftr-mid { grid-template-columns: 1fr; grid-template-areas: "links" "route" "copy" "scale"; row-gap: 18px; }
+  .ftr-copy { justify-self: end; }
+  .scale { width: 65%; }
 }
 
 /* scroll fluido (site.js) */
