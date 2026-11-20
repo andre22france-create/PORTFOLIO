@@ -110,6 +110,8 @@ ${canon}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 ${og ? `<meta property="og:image" content="${esc(abs(og))}"><meta name="twitter:card" content="summary_large_image">` : ''}
+<link rel="icon" href="${esc(o.asset('favicon.ico'))}" sizes="48x48">
+<link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-192.png'))}" sizes="192x192">
 <link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-light.png'))}" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/png" href="${esc(o.asset('favicon/favicon-dark.png'))}" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="${esc(o.asset('favicon/apple-touch-icon.png'))}">
