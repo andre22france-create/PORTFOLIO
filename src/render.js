@@ -69,7 +69,7 @@ function header(c, path) {
   const nav = (c.nav || [])
     .map((n) => {
       const cur = n.href !== '/' && path === n.href ? ' aria-current="page"' : '';
-      return `<a href="${esc(n.href)}"${cur}${n.href === '/contact/' ? ' data-ap="navlast"' : ''}>${esc(n.label)}${n.number ? `<sup>${esc(n.number)}</sup>` : ''}</a>`;
+      return `<a href="${esc(n.href)}"${cur}${n.href === '/contact/' ? ' data-ap="navlast"' : ''}><span class="lbl">${esc(n.label)}</span>${n.number ? `<sup>${esc(n.number)}</sup>` : ''}</a>`;
     })
     .join('');
   return `<header class="hdr" data-ap="hdr"><a class="hdr-name" href="/">${esc(c.site.name)}</a><nav class="hdr-nav" aria-label="Main">${nav}</nav></header>`;
