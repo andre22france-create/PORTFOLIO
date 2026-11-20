@@ -294,7 +294,7 @@ function formHome(c) {
 function formPortfolio(c) {
   const p = c.portfolio;
   return [
-    h('h2', {}, 'Pagina Portfolio'), h('p', { class: 'sub' }, 'Elenco di tutti i progetti. L’ordine si cambia dalla barra a sinistra (frecce ↑ ↓).'),
+    h('h2', {}, 'Pagina Progetti'), h('p', { class: 'sub' }, 'Elenco di tutti i progetti. L’ordine si cambia dalla barra a sinistra (frecce ↑ ↓).'),
     group('', fText('Titolo gigante nella hero', p, 'title'),
       fImage('Immagine hero', p, 'heroImage', { nameHint: 'portfolio-hero', hint2: 'Se vuota, usa la stessa della home.' }),
       fRow('Riga sopra la griglia', p.row)),
@@ -337,7 +337,7 @@ function formProject(c, p) {
   const el = [];
   const rerender = () => renderForm();
   el.push(h('h2', {}, p.title || 'Progetto'),
-    h('p', { class: 'sub url' }, '/work/portfolio/' + p.slug + '/'));
+    h('p', { class: 'sub url' }, '/work/projects/' + p.slug + '/'));
 
   const slugIn = h('input', { type: 'text', value: p.slug });
   slugIn.addEventListener('change', () => {
@@ -360,7 +360,7 @@ function formProject(c, p) {
     return h('div', { class: 'range' }, h('span', {}, lab), r, out);
   };
   el.push(group('Immagini principali',
-    fImage('Copertina (miniatura in home e portfolio)', p, 'cover', { nameHint: p.slug + '-cover' }),
+    fImage('Copertina (miniatura in home e nella pagina progetti)', p, 'cover', { nameHint: p.slug + '-cover' }),
     fText('Testo alternativo della copertina', p, 'coverAlt'),
     h('div', { class: 'field' }, h('span', {}, 'Punto focale del ritaglio'), rng('X', 'x'), rng('Y', 'y'),
       h('small', {}, 'In home la copertina è ritagliata in orizzontale: sposta il punto per scegliere cosa resta visibile.')),
@@ -444,7 +444,7 @@ function renderSidebar() {
       h('button', { class: 'go', type: 'button', onclick: () => select(sel) }, label), ...extra);
   sb.replaceChildren(
     h('h4', {}, 'Pagine'),
-    item('Home', { kind: 'home' }), item('Portfolio (elenco)', { kind: 'portfolio' }), item('Contatti', { kind: 'contact' }),
+    item('Home', { kind: 'home' }), item('Progetti (elenco)', { kind: 'portfolio' }), item('Contatti', { kind: 'contact' }),
     h('h4', {}, 'Progetti'),
     ...c.projects.map((p, i) =>
       item([h('span', { class: 'dot' + (p.featured ? '' : ' off'), title: p.featured ? 'In evidenza nella home' : 'Non in home' }), p.title || '(senza titolo)'], { kind: 'project', slug: p.slug }, [
@@ -487,9 +487,9 @@ function newProjectDialog() {
 function routeFor(sel) {
   switch (sel.kind) {
     case 'home': return '/';
-    case 'portfolio': return '/work/portfolio/';
+    case 'portfolio': return '/work/projects/';
     case 'contact': return '/contact/';
-    case 'project': return `/work/portfolio/${sel.slug}/`;
+    case 'project': return `/work/projects/${sel.slug}/`;
     default: return S.route;
   }
 }
@@ -555,9 +555,9 @@ frame().addEventListener('load', () => {
     e.preventDefault();
     const href = (a.getAttribute('href') || '').split('#')[0];
     if (href === '/') select({ kind: 'home' });
-    else if (href === '/work/portfolio/') select({ kind: 'portfolio' });
+    else if (href === '/work/projects/') select({ kind: 'portfolio' });
     else if (href === '/contact/') select({ kind: 'contact' });
-    else { const m = href.match(/^\/work\/portfolio\/([^/]+)\/$/); if (m) select({ kind: 'project', slug: m[1] }); }
+    else { const m = href.match(/^\/work\/projects\/([^/]+)\/$/); if (m) select({ kind: 'project', slug: m[1] }); }
   });
 });
 window.addEventListener('resize', layoutPreview);

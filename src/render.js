@@ -37,8 +37,8 @@ export const SCALE = { viewBox: '419.28 510.92 1081.45 58.16', d: "M419.28,510.9
 export function listRoutes(c) {
   return [
     { path: '/', kind: 'home' },
-    { path: '/work/portfolio/', kind: 'portfolio' },
-    ...(c.projects || []).map((p) => ({ path: `/work/portfolio/${p.slug}/`, kind: 'project', slug: p.slug })),
+    { path: '/work/projects/', kind: 'portfolio' },
+    ...(c.projects || []).map((p) => ({ path: `/work/projects/${p.slug}/`, kind: 'project', slug: p.slug })),
     { path: '/contact/', kind: 'contact' },
   ];
 }
@@ -134,7 +134,7 @@ ${footer(c, o)}
 function projectCard(p, i, o, variant) {
   const f = p.coverFocus || { x: 50, y: 50 };
   const style = `object-position:${Number(f.x ?? 50)}% ${Number(f.y ?? 50)}%`;
-  return `<a class="pcard pcard--${variant}" href="/work/portfolio/${esc(p.slug)}/">
+  return `<a class="pcard pcard--${variant}" href="/work/projects/${esc(p.slug)}/">
   <div class="pimg">${pic(p.cover, p.coverAlt || p.title, o, { ph: variant === 'wide' ? '2.8/1' : '1.4/1', style })}</div>
   <div class="pcap"><span class="pc-i">(${pad2(i + 1)})</span><span class="pc-t"><b>${esc(p.title)}</b><em>${esc(p.category)}</em></span><span class="pc-y">© ${esc(p.year)}</span></div>
 </a>`;
@@ -165,7 +165,7 @@ ${row(h.projectsRow)}
 <section class="projects" id="work">
   ${fit('giant', h.projectsHeading)}
   <div class="plist">${feat.map((p, i) => projectCard(p, i, o, 'wide')).join('')}</div>
-  <a class="cta" href="/work/portfolio/">${fit('cta-in', h.viewAllLabel)}</a>
+  <a class="cta" href="/work/projects/">${fit('cta-in', h.viewAllLabel)}</a>
 </section>
 </div>`;
   const s = c.site;
@@ -195,7 +195,7 @@ ${row(p.row, { ap: true })}
 </section>
 </div>`;
   return layout(c, path, o, {
-    title: `Portfolio — ${c.site.author}`, description: c.site.description, bodyClass: 'page-portfolio', main,
+    title: `Projects — ${c.site.author}`, description: c.site.description, bodyClass: 'page-portfolio', main,
   });
 }
 
@@ -230,7 +230,7 @@ ${row(c.site.projectRow)}
 <section class="pblocks">
 ${renderBlocks(p, o)}
 </section>
-<a class="explore cta" href="/work/portfolio/#work">${fit('explore-in', p.exploreLabel)}</a>
+<a class="explore cta" href="/work/projects/#work">${fit('explore-in', p.exploreLabel)}</a>
 </div>`;
   const desc = String(p.intro || c.site.description).replace(/\s+/g, ' ').slice(0, 160);
   return layout(c, path, o, {
@@ -266,9 +266,9 @@ export function renderPage(content, path, opts) {
   const o = norm(opts);
   const c = content;
   if (path === '/' || path === '') return renderHome(c, '/', o);
-  if (path === '/work/portfolio/') return renderPortfolio(c, path, o);
+  if (path === '/work/projects/') return renderPortfolio(c, path, o);
   if (path === '/contact/') return renderContact(c, path, o);
-  const m = path.match(/^\/work\/portfolio\/([^/]+)\/$/);
+  const m = path.match(/^\/work\/projects\/([^/]+)\/$/);
   if (m) {
     const p = (c.projects || []).find((x) => x.slug === m[1]);
     if (p) return renderProject(c, path, o, p);

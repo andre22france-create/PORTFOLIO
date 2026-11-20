@@ -70,6 +70,8 @@ if (base) {
   fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin/\n`);
   warnings.push('content.site.url è vuoto: canonical, sitemap e anteprime social sono disattivati finché non scrivi il dominio (Editor → Sito → "Indirizzo del sito").');
 }
+// vecchi indirizzi /work/portfolio/... → /work/projects/...
+fs.writeFileSync(path.join(dist, '_redirects'), '/work/portfolio /work/projects/ 301\n/work/portfolio/ /work/projects/ 301\n/work/portfolio/* /work/projects/:splat 301\n');
 fs.writeFileSync(path.join(dist, '_headers'), `/admin/*\n  X-Robots-Tag: noindex\n  Cache-Control: no-store\n/content/*\n  Cache-Control: no-store\n/images/*\n  Cache-Control: public, max-age=86400\n/fonts/*\n  Cache-Control: public, max-age=31536000\n/favicon/*\n  Cache-Control: public, max-age=86400\n`);
 
 console.log(`Build ok: ${routes.length} pagine → dist/`);

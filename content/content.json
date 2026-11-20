@@ -18,9 +18,9 @@
   },
   "nav": [
     {
-      "label": "PORTFOLIO",
+      "label": "PROJECTS",
       "number": "01",
-      "href": "/work/portfolio/"
+      "href": "/work/projects/"
     },
     {
       "label": "CONTACT",
@@ -41,18 +41,18 @@
     "aboutText": "My name is Andrea, and I’m a graphic designer from Treviso, Italy. I’m curious by nature, always eager to challenge myself and explore new creative directions. My passion for cinema, music, and the outdoors strongly influences the way I approach design and observe the world around me.\nI believe in the value of teamwork and in constantly seeking new experiences, as they help me grow both personally and professionally.",
     "projectsRow": {
       "left": "(02)",
-      "center": "(Portfolio)",
+      "center": "(Projects)",
       "right": "© 2026"
     },
     "projectsHeading": "PROJECTS",
     "viewAllLabel": "VIEW ALL PROJECTS→"
   },
   "portfolio": {
-    "title": "PORTFOLIO",
+    "title": "PROJECTS",
     "heroImage": "",
     "row": {
       "left": "(01)",
-      "center": "(Portfolio)",
+      "center": "(Projects)",
       "right": "© 2026"
     }
   },
@@ -83,8 +83,8 @@
     "wordmark": "ANDREA FRANCESCHETTO.PORTFOLIO",
     "links": [
       {
-        "label": "PORTFOLIO",
-        "href": "/work/portfolio/"
+        "label": "PROJECTS",
+        "href": "/work/projects/"
       },
       {
         "label": "CONTACT",
