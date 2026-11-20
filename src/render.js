@@ -77,12 +77,16 @@ function header(c, path) {
   return `<header class="hdr" data-ap="hdr"><a class="hdr-name" href="/">${esc(c.site.name)}</a><nav class="hdr-nav" aria-label="Main">${nav}</nav></header>`;
 }
 
+function scaleSvg(cls, extra = '') {
+  return `<svg class="${cls}"${extra} viewBox="${SCALE.viewBox}" aria-hidden="true"><path d="${SCALE.d}"/></svg>`;
+}
+
 function footer(c, o) {
   const f = c.footer || {};
   const route = f.routeImage
     ? `<img class="route" src="${esc(o.img(f.routeImage))}" alt="" loading="lazy">`
     : `<svg class="route" viewBox="${ROUTE.viewBox}" aria-hidden="true"><path d="${ROUTE.d}"/></svg>`;
-  const scale = `<svg class="scale" viewBox="${SCALE.viewBox}" aria-hidden="true"><path d="${SCALE.d}"/></svg>`;
+  const scale = scaleSvg('scale');
   const links = (f.links || []).map((l) => `<a href="${esc(l.href)}"${linkAttrs(l.href)}><span class="ar">↘︎</span>${esc(l.label)}</a>`).join('');
   return `<footer class="ftr" data-theme="blue">
   <div class="plusgrid" data-grid aria-hidden="true"></div>
@@ -153,6 +157,7 @@ function renderHome(c, path, o) {
   <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${header(c, path)}
   <div class="hero-foot" data-ap="foot">${esc(h.heroNote)}</div>
+  ${scaleSvg('hero-scale', ' data-ap="foot"')}
 </section>
 <div class="curtain">
 ${row(h.aboutRow)}
@@ -187,6 +192,7 @@ function renderPortfolio(c, path, o) {
   <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${header(c, path)}
   <h1 class="hero-title" data-ap="ptitle">${esc(p.title)}</h1>
+  ${scaleSvg('hero-scale', ' data-ap="foot"')}
 </section>
 <div class="curtain">
 ${row(p.row, { ap: true })}

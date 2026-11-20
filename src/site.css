@@ -98,6 +98,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   object-fit: cover; object-position: 50% 100%;
 }
 .hero-foot { position: absolute; left: var(--gut); bottom: var(--gut); font-size: 16px; letter-spacing: -.5px; z-index: 2; }
+.hero-scale { position: absolute; right: var(--gut); bottom: var(--gut); width: calc((100% - 2 * var(--gut)) * .26); height: auto; fill: #fff; z-index: 2; pointer-events: none; }
 .hero--page .hero-title {
   position: absolute; left: var(--gut); bottom: 2.6vw; z-index: 2;
   font-weight: 400; font-size: var(--fs-hero-title); line-height: .8; letter-spacing: -.025em;
@@ -282,6 +283,8 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   .hdr-name { white-space: nowrap; }
   .hdr-nav { gap: 22px; margin-right: 0; padding-top: 0; }
   .hero-foot { display: none; }
+  .hero-scale { width: calc((100% - 2 * var(--gut)) * .65); }
+  .hero--page .hero-scale { display: none; } /* si sovrapporrebbe al titolo */
   .phero-title { font-size: 11vw; line-height: 1; letter-spacing: -.03em; }
   .phero { height: 100svh; }
   .row-c { left: 56%; }
