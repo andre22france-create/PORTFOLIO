@@ -170,7 +170,7 @@
     window.addEventListener('resize', function () { clearTimeout(splitLines._t); splitLines._t = setTimeout(function () { if (ip.clientWidth !== lastW) doSplit(); }, 150); });
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting && !played) { played = true; intro.classList.add('is-in'); io.disconnect(); } });
-    }, { rootMargin: '0px 0px -50% 0px', threshold: 0 });
+    }, { rootMargin: '0px 0px 10% 0px', threshold: 0 });
     io.observe(ip);
   }
 })();

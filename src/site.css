@@ -185,7 +185,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 }
 .pintro { padding: 7vw var(--gut) 0; }
 .pintro p { font-size: 36px; line-height: 38px; letter-spacing: -.005em; } /* Framer: Heading 6 — 36px / 38 */
-/* Text effect Framer: layer in view (start al centro), replay no, per riga, opacity 0 → 1, offset Y 10, spring, delay 0 */
+/* Text effect Framer: layer in view (parte appena il blocco entra in vista), replay no, per riga, opacity 0 → 1, offset Y 10, spring, delay 0 */
 @media (prefers-reduced-motion: no-preference) {
   .js .pintro p:not(.split) { opacity: 0; }
   .js .pintro .ln { display: block; opacity: 0; }
