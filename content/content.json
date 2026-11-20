@@ -234,7 +234,7 @@
       "title": "THE BOOKLET",
       "category": "Editorial design",
       "year": "2026",
-      "featured": true,
+      "featured": false,
       "cover": "",
       "coverAlt": "Hand holding a vintage light meter",
       "coverFocus": {
@@ -252,7 +252,7 @@
       "category": "Branding",
       "year": "2026",
       "featured": true,
-      "cover": "images/banka-festival-cover-tec4p5.jpg",
+      "cover": "images/banka-festival-cover-92kldj.jpg",
       "coverAlt": "Close-up of a dandelion in blue and orange tones",
       "coverFocus": {
         "x": 50,
@@ -319,7 +319,7 @@
       "title": "MODULO FONT",
       "category": "Type design",
       "year": "2024",
-      "featured": false,
+      "featured": true,
       "cover": "images/modulo-font-cover-xzceft.jpg",
       "coverAlt": "Letters carved into a stone fragment",
       "coverFocus": {
