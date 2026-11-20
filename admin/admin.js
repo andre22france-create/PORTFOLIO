@@ -327,7 +327,7 @@ function formSite(c) {
     h('h2', {}, 'Sito e SEO'), h('p', { class: 'sub' }, 'Dati per Google e per le anteprime sui social.'),
     group('Indirizzo', fText('Indirizzo del sito', s, 'url', { hint: 'Il tuo dominio completo, es. https://www.tuodominio.it (senza / finale). Serve per canonical, sitemap e anteprime social.' })),
     group('Titolo e descrizione', fText('Titolo (tab del browser e Google)', s, 'title'), fText('Descrizione', s, 'description', { area: true, rows: 4, hint: 'Circa 150 caratteri.' }),
-      fImage('Immagine per le anteprime social', s, 'ogImage', { nameHint: 'og-image', hint2: 'Consigliato 1200×630.' }),
+      fImage('Immagine per le anteprime social', s, 'ogImage', { nameHint: 'og-image', hint2: 'Consigliato 1200×630.' })),
     group('Dati personali (per Google)', fText('Nome', s, 'author'), fText('Professione', s, 'jobTitle'), fText('Città', s, 'city'), fText('Lingua del sito (codice)', s, 'lang')),
     group('Pagine progetto', fRow('Riga sotto la hero di ogni progetto', s.projectRow)),
   ];
