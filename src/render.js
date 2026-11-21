@@ -6,6 +6,22 @@ export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export const nl2br = (s) => esc(s).replace(/\r?\n/g, '<br>');
 
+// Tipografia degli a capo (solo per i testi corsivi lunghi, non per meta/SEO):
+//  - parole di una sola lettera ("I", "a", "e", "o"...) legate alla parola successiva
+//  - se l'ultima parola del paragrafo è corta, legata alla penultima: niente riga finale da una parola
+//    (per quelle lunghe basta già text-wrap: pretty, un legame lungo creerebbe righe irregolari)
+//  - nessun a capo attorno a trattini lunghi senza spazi ("depth–key")
+export const typo = (s) =>
+  String(s ?? '')
+    .split(/\r?\n/)
+    .map((ln) =>
+      ln
+        .replace(/(^|[ \t])([A-Za-zÀ-ÿ])[ \t]+(?=\S)/g, '$1$2 ')
+        .replace(/(\S)([–—])(?=\S)/g, '$1⁠$2⁠')
+        .replace(/[ \t]+(\S{1,8})\s*$/, ' $1')
+    )
+    .join('\n');
+
 export const slugify = (s) =>
   String(s || '')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -208,7 +224,7 @@ ${row(p.row, { ap: true })}
 function renderBlocks(p, o) {
   return (p.blocks || [])
     .map((b, bi) => {
-      if (b.type === 'text') return `<p class="ptext">${nl2br(b.text)}</p>`;
+      if (b.type === 'text') return `<p class="ptext">${nl2br(typo(b.text))}</p>`;
       const cols = Math.min(3, Math.max(1, Number(b.columns) || 1));
       const ph = cols === 1 ? '16/9' : cols === 2 ? '4/3' : '4/5';
       const figs = (b.images || [])
@@ -232,7 +248,7 @@ function renderProject(c, path, o, p) {
 </section>
 <div class="curtain">
 ${row(c.site.projectRow)}
-<section class="pintro"><p>${nl2br(p.intro)}</p></section>
+<section class="pintro"><p>${nl2br(typo(p.intro))}</p></section>
 <section class="pblocks">
 ${renderBlocks(p, o)}
 </section>

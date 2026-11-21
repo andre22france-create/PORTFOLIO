@@ -185,7 +185,9 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   padding: 0 var(--gut); color: #fff;
 }
 .pintro { padding: 7vw var(--gut) 0; }
-.pintro p { font-size: 36px; line-height: 38px; letter-spacing: -.005em; } /* Framer: Heading 6 — 36px / 38 */
+.pintro p { font-size: 36px; line-height: 38px; letter-spacing: -.005em; text-wrap: pretty; } /* Framer: Heading 6 — 36px / 38 */
+.pintro .ln { white-space: nowrap; } /* righe già misurate dallo script: non devono mai riandare a capo */
+.ptext { text-wrap: pretty; }
 /* Text effect Framer: layer in view (parte appena il blocco entra in vista), replay no, per riga, opacity 0 → 1, offset Y 10, spring, delay 0 */
 @media (prefers-reduced-motion: no-preference) {
   .js .pintro p:not(.split) { opacity: 0; }
