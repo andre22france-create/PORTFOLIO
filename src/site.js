@@ -146,7 +146,7 @@
       ip.classList.remove('split'); ip.textContent = '';
       var parts = src.split('\n'), words = [];
       parts.forEach(function (ln, li) {
-        ln.split(/\s+/).filter(Boolean).forEach(function (w) { var sp = doc.createElement('span'); sp.textContent = w + ' '; sp.style.display = 'inline'; sp._br = false; words.push(sp); ip.appendChild(sp); });
+        ln.split(/[ \t]+/).filter(Boolean).forEach(function (w) { var sp = doc.createElement('span'); sp.textContent = w + ' '; sp.style.display = 'inline'; sp._br = false; words.push(sp); ip.appendChild(sp); });
         if (li < parts.length - 1 && words.length) { words[words.length - 1]._br = true; }
       });
       var lines = [], lastTop = null;
