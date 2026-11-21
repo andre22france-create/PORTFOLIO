@@ -153,6 +153,7 @@ function renderHome(c, path, o) {
   const about = (h.aboutText || '').split(/\n/).map((t) => esc(t)).join('<br>');
   const main = `
 <section class="hero" data-theme="blue">
+  <h1 class="sr-only">${esc(c.site.author)} — ${esc(c.site.jobTitle || 'Graphic Designer')}, ${esc(c.site.city || '')}</h1>
   ${hero}
   <div class="plusgrid" data-grid aria-hidden="true"></div>
   ${header(c, path)}
@@ -174,9 +175,11 @@ ${row(h.projectsRow)}
 </section>
 </div>`;
   const s = c.site;
+  const sameAs = ((c.contact && c.contact.links) || []).map((l) => l.href).filter((h) => /linkedin\.com|instagram\.com|behance\.net|github\.com/.test(h));
   const jsonld = {
     '@context': 'https://schema.org', '@type': 'Person', name: s.author, jobTitle: s.jobTitle,
     ...(s.url ? { url: s.url } : {}),
+    ...(sameAs.length ? { sameAs } : {}),
     address: { '@type': 'PostalAddress', addressLocality: s.city, addressCountry: s.country },
   };
   return layout(c, path, o, { title: s.title, description: s.description, bodyClass: 'page-home', main, jsonld });
